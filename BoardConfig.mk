@@ -31,7 +31,7 @@ TARGET_NO_RADIOIMAGE         := true
 TARGET_BOARD_PLATFORM     := msm8974
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
 
-USE_CLANG_PLATFORM_BUILD := true
+USE_CLANG_PLATFORM_BUILD := false
 
 # Architecture
 TARGET_ARCH         := arm
@@ -46,7 +46,7 @@ COMMON_GLOBAL_CFLAGS   += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64 -DUSE_RIL_V
 COMMON_GLOBAL_CPPFLAGS += -DUSE_RIL_VERSION_10
 
 # Kernel
-BOARD_KERNEL_CMDLINE               := console=none vmalloc=340M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE               := console=none vmalloc=340M androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT          := true
 BOARD_KERNEL_BASE                  := 0x00000000
 BOARD_KERNEL_PAGESIZE              := 2048
@@ -140,11 +140,7 @@ TARGET_RECOVERY_FSTAB              := $(CANCRO_PATH)/rootdir/root/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT       := "RGBX_8888"
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 
-# CM Hardware
-BOARD_USES_CYANOGEN_HARDWARE = true
-BOARD_HARDWARE_CLASS += \
-    hardware/cyanogen/cmhw \
-    $(CANCRO_PATH)/cmhw
+
 
 # No old RPC for prop
 TARGET_NO_RPC := true
@@ -189,3 +185,11 @@ BOARD_SEPOLICY_DIRS += \
         $(CANCRO_PATH)/sepolicy
 
 -include vendor/xiaomi/cancro/BoardConfigVendor.mk
+
+
+# Optimizations
+CLANG_O3 := false
+STRICT_ALIASING := false
+KRAIT_TUNINGS := false
+GRAPHITE_OPTS := false
+ENABLE_GCCONLY := false
